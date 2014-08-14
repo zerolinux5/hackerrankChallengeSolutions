@@ -2,20 +2,17 @@
 
 using namespace std;
 
-void stepsReached(long long numDesire){
-	int count = 0;
-	long i = 0;
-	while(i < 10000000000){
-		int summation = ( (i * (i+1) )/ 2 );
-		if (summation == numDesire){
-			cout << "Go On Bob " << count << endl;
-			break;
-		} else if (summation > numDesire){
-			cout << "Better Luck Next Time" << endl;
-			break;
-		}
-		count++;
-		i++;
+int stepsReached(long long numDesire, int count, long long begin, long long end){
+	long long binarySearch = (begin + end)/2;
+	long long summation = ( (binarySearch * (binarySearch+1) )/ 2 );
+	if(summation == numDesire){
+		return binarySearch;
+	} else if(binarySearch == begin){
+		return -1;
+	}else if(summation > numDesire){
+		return stepsReached(numDesire, binarySearch, begin, binarySearch);
+	} else {
+		return stepsReached(numDesire, binarySearch, binarySearch, end);
 	}
 }
 
@@ -24,9 +21,15 @@ int main()
 	int testNum;
 	cin >> testNum;
 	while(testNum--){
-		int input;
+		long long input;
 		cin >> input;
-		stepsReached(input);
+		long long end = 10000000000;
+		int count = stepsReached(input, 0, 0, end);
+		if(count == -1){
+			cout << "Better Luck Next Time" << endl;
+		} else {
+			cout << "Go On Bob " << count << endl;
+		}
 	}
 	return 0;
 }
