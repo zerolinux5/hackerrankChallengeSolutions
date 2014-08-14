@@ -2,22 +2,29 @@
 
 using namespace std;
 
-void reverse(int *array, int size, int comparison){
-	for(int n = 0; n < size; n++){
-		int j = size - 1;
-		int i = n;
-		while(i < j){
-			int temp = array[i];
-			array[i] = array[j];
-			array[j] = temp;
-			i++;
-			j--;
+void reverse(int size, int comparison){
+	int end = size-1;
+	int start = 0;
+	int flag = 0;
+	int count = 0;
+	while(flag < size){
+		if(flag % 2 == 0){
+			if(comparison == end){
+				cout << count << endl;
+				break;
+			}
+			end--;
+		} else {
+			if(comparison == start){
+				cout << count << endl;
+				break;
+			}
+			start++;
 		}
-		if(array[n] == comparison){
-			cout << n << endl;
-			break;
-		}
+		count++;
+		flag++;
 	}
+
 	/*
 	for(int i = 0; i < size;i++){
 		if(array[i] == comparison){
@@ -35,11 +42,7 @@ int main()
 	while(testNum--){
 		int size, num;
 		cin >> size >> num;
-		int array[size];
-		for(int i = 0; i < size;i++){
-			array[i] = i;
-		}
-		reverse(array, size, num);
+		reverse(size, num);
 	}
 
 	return 0;
