@@ -13,14 +13,19 @@ void reverse(int *array, int size, int comparison){
 			i++;
 			j--;
 		}
+		if(array[n] == comparison){
+			cout << n << endl;
+			break;
+		}
 	}
-
+	/*
 	for(int i = 0; i < size;i++){
 		if(array[i] == comparison){
 			cout << i << endl;
 		break;
 		}
 	}
+	*/
 }
 
 int main()
